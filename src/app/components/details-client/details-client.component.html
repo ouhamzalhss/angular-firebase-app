@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-6">
+           <a routerLink="/"> <h4> <i class="fa fa-arrow-circle-left"></i> Go to dashboard</h4> </a>
+    </div>
+    <div class="col-md-6 text-right">
+        <a class="btn btn-warning mr-2" routerLink="/client/edit/{{id}}" > <i class="fa fa-pencil"></i> Edit</a>
+        <a class="btn btn-danger" (click)="deleteClient(id)"> <i class="fa fa-trash"></i> Delete</a>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{client.firstName}} {{ client.lastName }} </h5>
+                <div class="row">
+                    <div class="col-md-9">
+                            <ul class="list-group">
+                                    <li class="list-group-item"> ID: <strong> {{ id }}  </strong> </li>
+                                    <li class="list-group-item"> email: <strong> {{ client.email }}  </strong> </li>
+                                    <li class="list-group-item"> phone: <strong> {{ client.phone }}  </strong> </li>
+                            </ul>
+                    </div>
+                    <div class="col-md-3 text-right">
+                          Balance 
+                          <button class="btn btn-success" (click)="showBalance = !showBalance"><i class="fa fa-pencil"></i> </button> 
+                          <h5 [ngClass]="{'text-danger': showBalance, 'text-success': !showBalance}">{{ client.balance | currency }}</h5>
+                
+                          <div *ngIf="showBalance">
+                              <form (submit)="onSubmit()">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="balance" id="balance" [(ngModel)]="client.balance">
+                                       <div class="btn-group">
+                                            <button type="submit" class="btn btn-warning" >update</button>
+                                       </div>
+                                    </div>
+                              </form>
+                          </div>
+                    
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>

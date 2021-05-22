@@ -1,0 +1,52 @@
+
+<div class="row">
+    <a [routerLink]="['/']" routerLinkActive="router-link-active" >
+        <i class="fa fa-arrow-circle-left"></i> Back to dashboard
+    </a>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h5 class="card-title"><i class="fa fa-user"></i> Edit Client</h5>
+       <form #formClient="ngForm" (ngSubmit)="updateClient()">
+           <div class="form-group">
+               <label class="control-label" for="firstName">FirstName</label>
+               <input 
+               type="text" 
+               class="form-control"  
+               name="firstName" 
+               id="firstName" 
+               [(ngModel)]="client.firstName"
+               #firstName="ngModel"
+               required
+               minlength="3"
+               [ngClass]="{'is-invalid': firstName.errors && firstName.touched }"
+               >
+
+               <div [hidden]="!firstName.errors?.required" class="invalid-feedback" >
+                   First name is required
+               </div>
+               <div [hidden]="!firstName.errors?.minlength" class="invalid-feedback" >
+                    Must be at least 3 caracters
+                </div>
+           </div>
+           <div class="form-group">
+                <label class="control-label" for="lastName">LastName</label>
+                <input type="text" class="form-control" name="lastName" id="lastName" [(ngModel)]="client.lastName">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="email">Email</label>
+                <input type="email" class="form-control" name="email" id="email" [(ngModel)]="client.email">
+            </div>
+            <div class="form-group">
+                    <label class="control-label" for="phone">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="phone" [(ngModel)]="client.phone">
+                </div>
+            <div class="form-group">
+                <label class="control-label" for="balance">Balance</label>
+                <input type="text" class="form-control"  name="balance" id="balance"  [(ngModel)]="client.balance">
+            </div>
+            <button class="btn btn-danger" type="submit" [disabled]="!formClient.valid">Update</button>
+       </form>
+    </div>
+</div>
